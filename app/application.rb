@@ -1,5 +1,4 @@
-module Baseball
-  module App
-    puts 'hi'
-  end
+
+module App
+  puts 'hi'
 end
