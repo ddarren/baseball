@@ -41,19 +41,19 @@ module Domain
 
         calculations = []
         statistics.each do |statistic|
-          if statistic.year == year
+          unless statistic.year == year
+            next
+          end
             
-            calculation = get_calculation(statistic.player_id, calculations)
-            
-            if calculation.nil?
-              calculation = YearCalculation.new(statistic.player_id, statistic.hits, statistic.at_bats, nil)
-              calculations << calculation
-            else
-              calculation.hits = statistic.hits
-              calculation.at_bats = statistic.at_bats
-            end
-               
-          end  
+          calculation = get_calculation(statistic.player_id, calculations)
+          
+          if calculation.nil?
+            calculation = YearCalculation.new(statistic.player_id, statistic.hits, statistic.at_bats, nil)
+            calculations << calculation
+          else
+            calculation.hits = statistic.hits
+            calculation.at_bats = statistic.at_bats
+          end 
           
         end  
         
