@@ -89,6 +89,52 @@ module Domain
         assert_equal "PlayerOne", player.id       
       end
       
+      def test_do_not_include_players_with_no_statistics_for_to_year
+        
+        statistics = [
+          Domain::Entities::Statistic.new(player_id: "PlayerOne", year: 2009, league: "NL", team_id: "LAN",
+          at_bats: 300, hits: 100, doubles: 3, triples: 3, home_runs: 10, runs_batted_in: 5),
+          Domain::Entities::Statistic.new(player_id: "PlayerTwo", year: 2009, league: "NL", team_id: "LAN",
+          at_bats: 300, hits: 100, doubles: 3, triples: 3, home_runs: 10, runs_batted_in: 5),
+          
+          Domain::Entities::Statistic.new(player_id: "PlayerOne", year: 2010, league: "NL", team_id: "LAN",
+          at_bats: 300, hits: 110, doubles: 3, triples: 3, home_runs: 10, runs_batted_in: 5),
+        ]      
+        
+        @statistic_repository_mock.stubs(:all).returns(statistics)
+        player = Domain::Entities::Player.new(id: "PlayerOne")
+        @player_repository_mock.stubs(:find).with("PlayerOne").returns(player)
+        
+        
+        player = @query.execute(2009, 2010)     
+        
+        assert_equal "PlayerOne", player.id       
+      end
+      
+      def test_do_not_include_players_with_no_statistics_for_from_year
+        
+        statistics = [
+          Domain::Entities::Statistic.new(player_id: "PlayerOne", year: 2009, league: "NL", team_id: "LAN",
+          at_bats: 300, hits: 100, doubles: 3, triples: 3, home_runs: 10, runs_batted_in: 5),
+          
+          Domain::Entities::Statistic.new(player_id: "PlayerOne", year: 2010, league: "NL", team_id: "LAN",
+          at_bats: 300, hits: 110, doubles: 3, triples: 3, home_runs: 10, runs_batted_in: 5),
+          Domain::Entities::Statistic.new(player_id: "PlayerTwo", year: 2010, league: "NL", team_id: "LAN",
+          at_bats: 300, hits: 180, doubles: 3, triples: 3, home_runs: 10, runs_batted_in: 5)        
+        ]      
+        
+        @statistic_repository_mock.stubs(:all).returns(statistics)
+        player = Domain::Entities::Player.new(id: "PlayerOne")
+        @player_repository_mock.stubs(:find).with("PlayerOne").returns(player)
+        
+        
+        player = @query.execute(2009, 2010)     
+        
+        assert_equal "PlayerOne", player.id       
+      end
+      
+      
+      
     end      
   end
 end

@@ -84,6 +84,10 @@ module Domain
         from_year_calculations.each do |from_year_calculation|
           to_year_calculation = get_calculation(from_year_calculation.player_id, to_year_calculations)
           
+          if to_year_calculation.nil?
+            next
+          end
+          
           unless at_least_two_hundred_at_bats?(from_year_calculation, to_year_calculation)
             next
           end

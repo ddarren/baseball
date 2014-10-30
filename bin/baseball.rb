@@ -6,3 +6,6 @@ require File.expand_path('init.rb')
 
 require 'app'
 
+application = App::Application.new
+application.run
+
