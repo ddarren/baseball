@@ -3,9 +3,9 @@ require "test_helper"
 module Domain
   module Repositories    
     class StatisticRepositoryTest < Minitest::Test
-      def test_return_all_statisitcs
-        repository = Domain::Repositories::StatisticRepository.new
-            
+      
+      def setup
+        @repository = Domain::Repositories::StatisticRepository.new
         
         rows = [
           ['playerID','yearID','league','teamID','G','AB','R','H','2B','3B','HR','RBI','SB','CS'],
@@ -14,9 +14,12 @@ module Domain
         
         csv = mock()
         csv.stubs(:read).returns(rows)
-        repository.csv = csv
+        @repository.csv = csv
         
-        statistics = repository.all
+      end
+      
+      def test_return_all_statisitcs        
+        statistics = @repository.all
         
         assert_equal 'abreubo01', statistics[0].player_id
         assert_equal 2008, statistics[0].year
@@ -29,6 +32,10 @@ module Domain
         assert_equal 20, statistics[0].home_runs
         assert_equal 100, statistics[0].runs_batted_in
       end      
+      
+      def test_conver_nil_numbers_to_zero
+        
+      end
     end      
   end
 end

@@ -12,6 +12,12 @@ module Domain
       attr_accessor :home_runs
       attr_accessor :runs_batted_in
 
+      def initialize(params={})
+        params.each do |key, value|
+          self.instance_variable_set("@#{key}".to_sym, value)
+        end
+      end
     end
+    
   end
 end

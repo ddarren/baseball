@@ -5,5 +5,6 @@ $LOAD_PATH.unshift app_dir unless $LOAD_PATH.include?(app_dir)
 
 $DATA_PATH = File.expand_path('../data', __FILE__)
 
+require 'pry'
 require 'domain'
 require 'app'
