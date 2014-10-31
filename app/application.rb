@@ -3,8 +3,10 @@ module App
   class Application
     def run
       output_player_with_most_improved_batting_average
-      puts ""
+      print "\n"
       output_slugging_percentages
+      print "\n"
+      output_triple_crown_winners
     end
     
     private
@@ -17,6 +19,14 @@ module App
     def output_slugging_percentages
       command = Domain::Commands::OutputPlayerSluggingPercentages.new
       command.execute("OAK", 2007)
+    end
+    
+    def output_triple_crown_winners
+      command = Domain::Commands::OutputTripleCrownWinner.new
+      command.execute("AL", 2011)
+      command.execute("NL", 2011)
+      command.execute("AL", 2012)
+      command.execute("NL", 2012)
     end
   end
 end
