@@ -15,8 +15,8 @@ module Domain
         from_year_calculations = get_calculations(statistics, from_year)
         to_year_calculations = get_calculations(statistics, to_year)
         
-        calculate_batting_averages!(from_year_calculations)
-        calculate_batting_averages!(to_year_calculations)
+        calculate_batting_averages.execute(from_year_calculations)
+        calculate_batting_averages.execute(to_year_calculations)
         
         improvement_percentage = get_highest_improvement_percentage(from_year_calculations, to_year_calculations)
         
@@ -35,6 +35,10 @@ module Domain
         @player_repository ||= Domain::Repositories::PlayerRepository.new
       end
       
+      def calculate_batting_averages
+        @calculate_batting_averages ||= Domain::Commands::CalculateBattingAverages.new
+      end
+      
       def get_calculations(statistics, year)
 
         calculations = []
@@ -49,8 +53,8 @@ module Domain
             calculation = YearCalculation.new(statistic.player_id, statistic.hits, statistic.at_bats, nil)
             calculations << calculation
           else
-            calculation.hits = statistic.hits
-            calculation.at_bats = statistic.at_bats
+            calculation.hits += statistic.hits
+            calculation.at_bats += statistic.at_bats
           end 
           
         end  
@@ -66,13 +70,6 @@ module Domain
         end
         
         return nil
-      end
-      
-      def calculate_batting_averages!(calculations)
-        calculations.each do |calculation|
-          
-          calculation.batting_average = (calculation.hits.to_f / calculation.at_bats.to_f)
-        end
       end
       
       def get_highest_improvement_percentage(from_year_calculations, to_year_calculations)
