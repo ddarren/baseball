@@ -1,10 +1,9 @@
 module Domain
   module Entities
-    class Player
-      attr_accessor :id
-      attr_accessor :first_name
-      attr_accessor :last_name
-      attr_accessor :birth_year
+    class PlayerSluggingPercentage
+      attr_accessor :player
+      attr_accessor :percentage
+      attr_accessor :year
       
       def initialize(params={})
         params.each do |key, value|

@@ -1,5 +1,3 @@
-require "CSV"
-
 module Domain
   module Queries   
      
