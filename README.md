@@ -1,5 +1,12 @@
 # Baseball
 
+## Getting the project ready
+The project uses Ruby 2.1.2 as specified by the `.ruby-version` file. 
+You'll want to install this version on your system.
+The project also make us of Bundler for it's gem management.
+
+Run `bundle install` from the root directoy to install all needed gems.
+
 ## Running the Application
 Simple call the baseball.rb file from the command line: `bin/baseball.rb`
 
