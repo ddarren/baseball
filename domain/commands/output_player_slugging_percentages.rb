@@ -9,7 +9,7 @@ module Domain
         player_slugging_percentages = get_player_slugging_percentages.execute(team_id, year)
       
         player_slugging_percentages.each do |psp|
-          puts "#{psp.player.first_name} #{psp.player.last_name}: #{psp.percentage * 100}%"
+          puts "#{psp.player.first_name} #{psp.player.last_name}: #{(psp.percentage * 100).round(2)}%"
         end
       end 
       

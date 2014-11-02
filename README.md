@@ -28,7 +28,7 @@ The application borrows from principles from Domain Driven Design and CQRS.
 **domain/repositories**: Is responsible for mapping the data to entities.
 
 **domain/queries**: Responsible for returning any actionable data the domain needs. 
-  Cannot modify state and is part of the CQRS architecture.
+  Quieries cannot modify state and are part of the CQRS architecture.
 
 **domain/commands**: Actions that will modify state or make a change. No data will be returned from the commands.
 This an implementation of the command pattern and also follows CQRS.
@@ -38,7 +38,7 @@ This an implementation of the command pattern and also follows CQRS.
 
 Dependency Injection done through property injection has been utilized throughout the application.
 
-If an object is not given it's dependencies by outside source, then it will use a default dependency.
+If an object is not given a dependency by an outside source, then it will use a default dependency.
 This allow an object to be functional independently without coupling it to an externality such as
 a dependency injection framework. A similar alternative to this approach would be to have default dependency
 be a null object (null object pattern). In that case the object can still be functional, but calls to the
