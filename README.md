@@ -57,7 +57,7 @@ You can also run the tests invidually via `ruby -Itest path/to/test.rb`
 As with all applications, there can be more possible improvements:
 
 - Improve the speed of  slugging percentages query which is currently quite slow. 
-- If the application become complex, it may be worth abstracting STDOUT away from the domain commands 
+- If the application becomes complex, it may be worth abstracting STDOUT away from the domain commands 
   and instead have an output object injected. 
 - While the application has sufficient unit test coverage, an overall automated system test would be nice too.
   
