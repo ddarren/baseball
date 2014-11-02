@@ -48,6 +48,10 @@ default dependencies would do nothing.
 
 MiniTest is used at the testing framework. Unit testing has be done on all the classes in the domain folder.
 
+To run all of the tests, type `rake test`
+
+You can also run the tests invidually via `ruby -Itest path/to/test.rb`
+
 ## Possible Improvements
 
 As with all applications, there can be more possible improvements:
