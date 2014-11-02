@@ -39,7 +39,7 @@ This an implementation of the command pattern and also follows CQRS.
 Dependency Injection done through property injection has been utilized throughout the application.
 
 If an object is not given a dependency by an outside source, then it will use a default dependency.
-This allow an object to be functional independently without coupling it to an externality such as
+This allows an object to be functional independently without coupling it to an externality such as
 a dependency injection framework. A similar alternative to this approach would be to have default dependency
 be a null object (null object pattern). In that case the object can still be functional, but calls to the
 default dependencies would do nothing.
